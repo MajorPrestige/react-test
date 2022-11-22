@@ -32,9 +32,9 @@ export const App = () => {
 	};
 
   const onResetButtonClick = () => {
-    setCountries([]);
     setFilter("");
     setselectedCountryHolidays([]);
+    onDescButtonClick();
   }
 
 	const filterCountries = ({ target }) => {
