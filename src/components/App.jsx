@@ -48,12 +48,12 @@ export const App = () => {
     // #3 update this function to handle county click and fetch holidays
   };
   return (
-    <div class="container">
+    <div className="container">
       <h1>React Test</h1>
-      <div class="body">
-        <div class="search-area">
-          <section class="search-field">
-            <label for="search">Search text</label>
+      <div className="body">
+        <div className="search-area">
+          <section className="search-field">
+            <label htmlFor="search">Search text</label>
             {/* #2 On the input, filter the countries listed below */}
             <input id="search" type="text" />
 
@@ -62,7 +62,7 @@ export const App = () => {
           </section>
           <ListItems items={data}></ListItems>
         </div>
-        <div class="info-area">{/* #3 display selectedCountryHolidays here */}</div>
+        <div className="info-area">{/* #3 display selectedCountryHolidays here */}</div>
       </div>
     </div>
   );
