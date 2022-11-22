@@ -2,16 +2,11 @@ import { useState, useEffect } from "react";
 import { fetchCountries, fetchNextHolidays } from "api/api";
 import CountriesList from "./CountriesList/CountriesList";
 
-// ToDo:
-// #4 Add a Sort button next to the input. It should sort the list of countries that the user sees on the screen in desc or asc order.
-// Default order os desc. The name of the button should indicate what type of sorting will be performed when clicked.
-// #5 Next to the Sort button, add a Reset button to empty the app
-// * You are welcome to edit/refactor any piece of code below if you believe it can be improved or to express your code style.
-
 export const App = () => {
 	const [countries, setCountries] = useState([]);
 	const [filter, setFilter] = useState("");
 	const [selectedCountryHolidays, setselectedCountryHolidays] = useState([]);
+	const [isCountriesDesc, setIsCountriesDesc] = useState(true);
 
 	useEffect(() => {
 		fetchCountries()
@@ -24,15 +19,23 @@ export const App = () => {
 		setselectedCountryHolidays(data);
 	};
 
-	const onAscendingButtonClick = () => {
+	const onAscButtonClick = () => {
 		const inAscending = countries.sort((a, b) => b.countryCode.localeCompare(a.countryCode));
+		setIsCountriesDesc(false);
 		setCountries([...inAscending]);
 	};
 
-	const onDescendingButtonClick = () => {
-		const Descending = countries.sort((a, b) => a.countryCode.localeCompare(b.countryCode));
-		setCountries([...Descending]);
+	const onDescButtonClick = () => {
+		const inDescending = countries.sort((a, b) => a.countryCode.localeCompare(b.countryCode));
+		setIsCountriesDesc(true);
+		setCountries([...inDescending]);
 	};
+
+  const onResetButtonClick = () => {
+    setCountries([]);
+    setFilter("");
+    setselectedCountryHolidays([]);
+  }
 
 	const filterCountries = ({ target }) => {
 		setFilter(target.value);
@@ -51,9 +54,12 @@ export const App = () => {
 							Search text
 							<input type="text" onChange={filterCountries} value={filter} />
 						</label>
-						<button onClick={onAscendingButtonClick}>Asc</button>
-						<button onClick={onDescendingButtonClick}>Desc</button>
-						<button>{/* #5 Reset button */}</button>
+						{isCountriesDesc ? (
+							<button onClick={onAscButtonClick}>Asc</button>
+						) : (
+							<button onClick={onDescButtonClick}>Desc</button>
+						)}
+						<button onClick={onResetButtonClick}>Reset</button>
 					</section>
 					<CountriesList handleClick={onCountryClick} items={filterCountriesNormalized}></CountriesList>
 				</div>
