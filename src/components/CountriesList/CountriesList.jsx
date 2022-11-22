@@ -1,5 +1,5 @@
-const CountriesList = ({ items }) => {
-	return <ul>{items.map(el => (<li data-code={el.countryCode} key={el.countryCode}>{el.name}</li>))}</ul>;
+const CountriesList = ({ items, handleClick }) => {
+	return <ul>{items.map(el => (<li data-code={el.countryCode} key={el.countryCode} onClick={handleClick}>{el.name}</li>))}</ul>;
 };
 
 export default CountriesList;
