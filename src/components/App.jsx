@@ -15,9 +15,24 @@ export const App = () => {
 
 	useEffect(() => {
 		fetchCountries()
-			.then(data => setCountries(countries => (countries = data)))
+			.then(data => setCountries(data))
 			.catch(err => console.log(err));
 	}, []);
+
+	const onCountryClick = async ({ target }) => {
+		const data = await fetchNextHolidays(target.dataset.code);
+		setselectedCountryHolidays(data);
+	};
+
+	const onAscendingButtonClick = () => {
+		const inAscending = countries.sort((a, b) => b.countryCode.localeCompare(a.countryCode));
+		setCountries([...inAscending]);
+	};
+
+	const onDescendingButtonClick = () => {
+		const Descending = countries.sort((a, b) => a.countryCode.localeCompare(b.countryCode));
+		setCountries([...Descending]);
+	};
 
 	const filterCountries = ({ target }) => {
 		setFilter(target.value);
@@ -25,11 +40,6 @@ export const App = () => {
 
 	const filterNormalized = filter.toLowerCase();
 	const filterCountriesNormalized = countries.filter(country => country.name.toLowerCase().includes(filterNormalized));
-
-	const onCountryClick = async ({ target }) => {
-		const data = await fetchNextHolidays(target.dataset.code);
-		setselectedCountryHolidays(data);
-	};
 
 	return (
 		<div className="container">
@@ -41,7 +51,8 @@ export const App = () => {
 							Search text
 							<input type="text" onChange={filterCountries} value={filter} />
 						</label>
-						<button>{/* #4 Sort button */}</button>
+						<button onClick={onAscendingButtonClick}>Asc</button>
+						<button onClick={onDescendingButtonClick}>Desc</button>
 						<button>{/* #5 Reset button */}</button>
 					</section>
 					<CountriesList handleClick={onCountryClick} items={filterCountriesNormalized}></CountriesList>
