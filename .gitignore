@@ -27,3 +27,7 @@ yarn-error.log*
 
 # Local Netlify folder
 .netlify
+node_modules/.cache/.eslintcache
+node_modules/.cache/default-development/6.pack
+node_modules/.cache/default-development/index.pack
+node_modules/.cache/default-development/index.pack.old
