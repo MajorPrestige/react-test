@@ -14,35 +14,17 @@ export const fetchNextHolidays = async (countryCode) => {
   return data;
 };
 
-let a = 0;
-
-const counter = (number) => {
-  console.log(number);
+const counter = (num) => {
   return () => {
-    return (number += 1);
-  };
+		num +=1;
+		console.log(num)
+	};
 };
 
-counter(a);
-counter(a);
-counter(a);
-counter(a);
-counter(a);
-console.log(a);
+const newCounter = counter(0);
 
-
-var currentCount = 1;
-
-function makeCounter() {
-  return function() {
-    return currentCount++;
-  };
-}
-
-makeCounter();
-makeCounter();
-makeCounter();
-makeCounter();
-makeCounter();
-console.log(currentCount)
-
+newCounter();
+newCounter();
+newCounter();
+newCounter();
+newCounter();
