@@ -21,10 +21,19 @@ const counter = (num) => {
 	};
 };
 
-const newCounter = counter(0);
+// const newCounter = counter(0);
 
-newCounter();
-newCounter();
-newCounter();
-newCounter();
-newCounter();
+// newCounter();
+// newCounter();
+// newCounter();
+// newCounter();
+// newCounter();
+
+
+const counter2 = num => {
+	for (let i = 1; i <= num; i++ ) {
+		console.log(i)
+	}
+}
+
+// counter2(1e3);
